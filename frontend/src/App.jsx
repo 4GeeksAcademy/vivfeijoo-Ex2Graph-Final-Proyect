@@ -1,25 +1,23 @@
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
-import Navbar from './components/Navbar.jsx'
-import Login from './views/Login.jsx'
-import Register from './views/Register.jsx'
-import Upload from './views/Upload.jsx'
-import Reports from './views/Reports.jsx'
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Login from "./views/Login";
+import Register from "./views/Register";
+import Upload from "./views/Upload";
+import Reports from "./views/Reports";
 
-const App = () => {
+function App() {
   return (
-    <>
+    <BrowserRouter>
       <Navbar />
-      <div className="container mt-4">
-        <Routes>
-          <Route path="/" element={<Upload />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/reports" element={<Reports />} />
-        </Routes>
-      </div>
-    </>
-  )
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/upload" element={<Upload />} />
+        <Route path="/reports" element={<Reports />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
