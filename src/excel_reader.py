@@ -1,19 +1,21 @@
 import pandas as pd
 
-def read_excel(filename):
-    path = f"../data/{filename}"
+# This function reads the Excel file and adds columns for delay analysis
+def read_excel(file_name):
+    path = f"data/{file_name}"  # ✅ This matches the variable name from the function
+
     try:
-        # Read Excel file
+        # Load the Excel file
         df = pd.read_excel(path)
 
-        # Convert date columns to datetime format
+        # Convert both columns to date format
         df["Delivery Date"] = pd.to_datetime(df["Delivery Date"])
         df["Actual Delivery"] = pd.to_datetime(df["Actual Delivery"])
 
-        # Check if the order was delivered on time
+        # Add a column to check if delivery was on time
         df["On Time"] = df["Actual Delivery"] <= df["Delivery Date"]
 
-        # Calculate delay in days (0 if on time)
+        # Calculate the delay in days (0 if not late)
         df["Delay (days)"] = (df["Actual Delivery"] - df["Delivery Date"]).dt.days
         df["Delay (days)"] = df["Delay (days)"].apply(lambda x: x if x > 0 else 0)
 
@@ -23,3 +25,4 @@ def read_excel(filename):
     except Exception as e:
         print("❌ Error reading Excel file:", e)
         return None
+
